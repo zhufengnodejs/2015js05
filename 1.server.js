@@ -12,6 +12,6 @@ var serve = function(request,response){
 //作为参数传进去，在请求到来的时候调用
 var server = http.createServer(serve);
 //在某个主机的某个端口上监听客户端的请求
-server.listen(8080,'localhost');
+server.listen(8088);
 
 
