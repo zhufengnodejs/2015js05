@@ -1,12 +1,6 @@
 GET http://localhost:8080/ HTTP/1.1
 Host: localhost:8080
-Connection: keep-alive
-Cache-Control: max-age=0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
-Accept-Encoding: gzip, deflate, sdch
-Accept-Language: zh-CN,zh;q=0.8
+
 
 
 
@@ -21,3 +15,8 @@ hello
 world
 0
 
+1xx 请求已经接收，正在处理中
+2xx 成功处理
+3xx 重定向 告诉你资源在哪 localhost:9090
+4xx 客户端错误
+5xx 服务器错误
