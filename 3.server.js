@@ -18,7 +18,6 @@ var waitress = function(request,response){
     var queryObj = {};//把查询字符串转成对象
     if(urls[1]){
         var fields = urls[1].split('&');
-
         fields.forEach(function(field){
             var values = field.split('=');
             queryObj[values[0]] =  [values[1]];
@@ -30,10 +29,12 @@ var waitress = function(request,response){
     if(pathname == 'favicon.ico'){
         response.end('404');
     }
+    response.setHeader('Content-Type','text/html;charset=utf-8');
     if(pathname == '/'){//如果访问的是根目录
         //读取menu.html文件里的内容并且写入响应response里面
         response.setHeader('Content-Type','text/html;charset=utf-8');
-        var content= fs.readFileSync("./menu.html");
+        var content= fs.readFileSync("./menu.html",'utf8');
+        content = content.replace('{{nowTime}}',new Date().toLocaleString());
         response.write(content);
         response.end();
 
@@ -44,7 +45,12 @@ var waitress = function(request,response){
         response.end(queryObj.num+decodeURIComponent(queryObj.measure)+'红烧排骨');
     }else if(pathname == '/meat'){
         response.end(queryObj.num+decodeURIComponent(queryObj.measure)+'红烧肉');
-    }else{
+    }else if(pathname == '/time'){
+        setTimeout(function(){
+            response.end(new Date().toLocaleString());
+        },8000);
+
+    } else{
         if(pathname.indexOf('/public') ==0){
             response.setHeader('Content-Type',mime.lookup('.'+pathname));
             var content= fs.readFileSync('.'+pathname);

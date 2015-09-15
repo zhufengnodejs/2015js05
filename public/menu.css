@@ -1,5 +1,5 @@
-body{
-    background-color:red;
+.active{
+    color:red;
 }
 .small{
     width:100px;

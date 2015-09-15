@@ -6,12 +6,31 @@
     <link rel="stylesheet" href="/public/menu.css"/>
 </head>
 <body>
+<div class="active" id="clock">{{nowTime}}</div>
 <ul style="list-style: none">
     <li><a href="/fish?measure=条&num=2">红烧鱼</a></li>
-    <li ><a href="/pork?measure=桶&num=2">红烧排骨</a></li>
+    <li  ><a href="/pork?measure=桶&num=2">红烧排骨</a></li>
     <li><a href="/meat?measure=碗&num=2">红烧肉</a></li>
     <img class="small" src="public/2.png" alt=""/>
 </ul>
 </body>
 <script src="public/menu.js"></script>
+<script type="text/javascript">
+    setInterval(function(){
+        var xhr = new XMLHttpRequest();//炊事员
+        xhr.open('GET','/time',true);//通过何种方式请求服务器哪个资源
+        xhr.onreadystatechange = function(){//当状态变化的时候要调哪个方法
+            // readyState是xhr自己的状态，   status 服务器的响应
+            console.log(this.readyState,this.status);
+            if(this.readyState == 4 && this.status == 200){
+                document.querySelector('#clock').innerHTML = this.responseText;
+            }
+        }
+        xhr.send();
+        console.log('newtime');
+
+
+    },1000);
+
+</script>
 </html>
