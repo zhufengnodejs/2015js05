@@ -6,9 +6,27 @@
 </head>
 <body>
 <form action="/reg" method="post" enctype="application/x-www-form-urlencoded" >
-    用户名<input type="text" name="username"/>
+    用户名<input id="username" type="text" name="username" onblur="validate()"/>
     密码<input type="text" name="password"/>
     <input type="submit" value="注册"/>
 </form>
 </body>
+<script>
+    function validate(){
+        var nameValue = document.querySelector('#username').value;
+        var xhr = new XMLHttpRequest();//炊事员
+        xhr.open('POST','/validate',true);//通过何种方式请求服务器哪个资源
+        xhr.onreadystatechange = function(){//当状态变化的时候要调哪个方法
+            // readyState是xhr自己的状态，   status 服务器的响应
+            if(this.readyState == 4 && this.status == 200){
+                var result = JSON.parse(this.responseText);
+                if(result.code == 'fail'){
+                    document.querySelector('#username').value = '';
+                    alert('你的用户名已经被人占用了，请换一个吧');
+                }
+            }
+        }
+        xhr.send(nameValue);
+    }
+</script>
 </html>
