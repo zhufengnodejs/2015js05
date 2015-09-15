@@ -1,0 +1,2 @@
+#找到被占用的端口的进程ID
+netstat -ano | findstr "8080"
